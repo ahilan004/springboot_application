@@ -1,117 +1,65 @@
 jQuery(document).ready(function($) {
 
-    'use strict';
+	'use strict';
 
-
-        $(".Modern-Slider").slick({
-            autoplay:true,
-            speed:1000,
-            slidesToShow:1,
-            slidesToScroll:1,
-            pauseOnHover:false,
-            dots:true,
-            fade: true,
-            pauseOnDotsHover:true,
-            cssEase:'linear',
-           // fade:true,
-            draggable:false,
-            prevArrow:'<button class="PrevArrow"></button>',
-            nextArrow:'<button class="NextArrow"></button>', 
+        $(function() {
+  
+          // Vars
+          var modBtn  = $('#modBtn'),
+              modal   = $('#modal'),
+              close   = modal.find('.close-btn img'),
+              modContent = modal.find('.modal-content');
+          
+          // open modal when click on open modal button 
+          modBtn.on('click', function() {
+            modal.css('display', 'block');
+            modContent.removeClass('modal-animated-out').addClass('modal-animated-in');
           });
-
-        $('#nav-toggle').on('click', function (event) {
-            event.preventDefault();
-            $('#main-nav').toggleClass("open");
+          
+          // close modal when click on close button or somewhere out the modal content 
+          $(document).on('click', function(e) {
+            var target = $(e.target);
+            if(target.is(modal) || target.is(close)) {
+              modContent.removeClass('modal-animated-in').addClass('modal-animated-out').delay(300).queue(function(next) {
+                modal.css('display', 'none');
+                next();
+              });
+            }
+          });
+          
         });
 
-
-        $('.tabgroup > div').hide();
-            $('.tabgroup > div:first-of-type').show();
-            $('.tabs a').click(function(e){
-              e.preventDefault();
-                var $this = $(this),
-                tabgroup = '#'+$this.parents('.tabs').data('tabgroup'),
-                others = $this.closest('li').siblings().children('a'),
-                target = $this.attr('href');
-            others.removeClass('active');
-            $this.addClass('active');
-            $(tabgroup).children('div').hide();
-            $(target).show();
+        // on click event on all anchors with a class of scrollTo
+        $('a.scrollTo').on('click', function(){
+          
+          // data-scrollTo = section scrolling to name
+          var scrollTo = $(this).attr('data-scrollTo');
+          
+          
+          // toggle active class on and off. added 1/24/17
+          $( "a.scrollTo" ).each(function() {
+            if(scrollTo == $(this).attr('data-scrollTo')){
+              $(this).addClass('active');
+            }else{
+              $(this).removeClass('active');
+            }
+          });
+          
+          
+          // animate and scroll to the sectin 
+          $('body, html').animate({
+            
+            // the magic - scroll to section
+            "scrollTop": $('#'+scrollTo).offset().top
+          }, 1000 );
+          return false;
           
         })
+ 
 
-
-
-        $(".box-video").click(function(){
-          $('iframe',this)[0].src += "&amp;autoplay=1";
-          $(this).addClass('open');
+        $(".menu-icon").click(function() {
+          $(this).toggleClass("active");
+          $(".overlay-menu").toggleClass("open");
         });
-
-        $('.owl-carousel').owlCarousel({
-            loop:true,
-            margin:30,
-            responsiveClass:true,
-            responsive:{
-                0:{
-                    items:1,
-                    nav:true
-                },
-                600:{
-                    items:2,
-                    nav:false
-                },
-                1000:{
-                    items:3,
-                    nav:true,
-                    loop:false
-                }
-            }
-        })
-
-
-
-        var contentSection = $('.content-section, .main-banner');
-        var navigation = $('nav');
-        
-        //when a nav link is clicked, smooth scroll to the section
-        navigation.on('click', 'a', function(event){
-            event.preventDefault(); //prevents previous event
-            smoothScroll($(this.hash));
-        });
-        
-        //update navigation on scroll...
-        $(window).on('scroll', function(){
-            updateNavigation();
-        })
-        //...and when the page starts
-        updateNavigation();
-        
-        /////FUNCTIONS
-        function updateNavigation(){
-            contentSection.each(function(){
-                var sectionName = $(this).attr('id');
-                var navigationMatch = $('nav a[href="#' + sectionName + '"]');
-                if( ($(this).offset().top - $(window).height()/2 < $(window).scrollTop()) &&
-                      ($(this).offset().top + $(this).height() - $(window).height()/2 > $(window).scrollTop()))
-                    {
-                        navigationMatch.addClass('active-section');
-                    }
-                else {
-                    navigationMatch.removeClass('active-section');
-                }
-            });
-        }
-        function smoothScroll(target){
-            $('body,html').animate({
-                scrollTop: target.offset().top
-            }, 800);
-        }
-
-
-        $('.button a[href*=#]').on('click', function(e) {
-          e.preventDefault();
-          $('html, body').animate({ scrollTop: $($(this).attr('href')).offset().top -0 }, 500, 'linear');
-        });
-
 
 });

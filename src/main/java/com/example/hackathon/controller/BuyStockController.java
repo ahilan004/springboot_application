@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import yahoofinance.Stock;
+import yahoofinance.histquotes.HistoricalQuote;
 
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,26 @@ public class BuyStockController {
 	@Autowired
 	private StockRepository stockRepository;
 	
+	@Autowired
+	private FinanceService service;
 	
+	@GetMapping("/buy")
+	public List<Trade> getBuy(){
+		TradeType TradType = TradeType.valueOf("BUY");
+		return stockRepository.findByType(TradType);	
+		}
+	@GetMapping("/sell")
+	public List<Trade> getSell(){
+		TradeType TradType = TradeType.valueOf("SELL");
+		return stockRepository.findByType(TradType);	
+		}
+	
+	
+	@GetMapping(value = "/history/{symbol}")
+    public List<HistoricalQuote> stockHistory(@PathVariable String symbol) throws IOException {
+        StockWrapper w = service.findStock(symbol);
+        return service.findHistory(w);
+    }
 	
 	@RequestMapping(method=RequestMethod.POST, value="/create")
 	public Trade create(@Valid @RequestBody Trade stock) throws IOException{
