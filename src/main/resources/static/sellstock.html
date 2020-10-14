@@ -30,7 +30,7 @@
  var availablequantity;
  
  
- function myFunction() {
+ /*function myFunction() {
  
 	 //getting ticker from url
 	 const queryString = window.location.search;
@@ -55,17 +55,14 @@
          	availablequantity=data;
          	
          	document.getElementById("AvailableQuantity").value=availablequantity;
-         	if(availablequantity==0){
-         		alert("0 Quantity to sell");
-         		window.location.href="index.html";
-         	}
+         	
          });
      }).catch(function(error) {
          console.log('Fetch Error:', error);
      });
 
  	
- }
+ }*/
  
          //store details in mongodb and need to set username in mongo
             async function submitHandler(event) {
@@ -166,7 +163,10 @@ var FieldVal = document.getElementById('quantity').value;
             	fetch('stocks/sell/'+value+'/Ahilan004').then(function(response){
                     response.json().then(function(data) {
                     	availablequantity=data;
-                    	
+                    	if(availablequantity==0){
+                     		alert("0 Quantity to sell");
+                     		window.location.href="sellstock.html";
+                     	}
                     	document.getElementById("AvailableQuantity").value=availablequantity;
                     	
                     });
@@ -222,7 +222,7 @@ var FieldVal = document.getElementById('quantity').value;
 
 </head>
 
-<body onload="myFunction();myFunction1()">
+<body >
     <div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
         <div class="wrapper wrapper--w680">
             <div class="card card-4">
