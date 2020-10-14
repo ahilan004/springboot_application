@@ -46,6 +46,13 @@ public class BuyStockController {
 		TradeType TradType = TradeType.valueOf("BUY");
 		return stockRepository.findByType(TradType);	
 		}
+	
+	@GetMapping("/getall")
+	public List<Trade> getAll(){
+		
+		return stockRepository.findAll();	
+		}
+	
 	@GetMapping("/sell")
 	public List<Trade> getSell(){
 		TradeType TradType = TradeType.valueOf("SELL");
