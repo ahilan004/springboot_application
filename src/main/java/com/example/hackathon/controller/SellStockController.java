@@ -78,5 +78,4 @@ public class SellStockController {
 		return buyquantity-sellquantity;	
 		}
 
-
-}
+	}
