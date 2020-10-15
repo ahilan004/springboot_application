@@ -9,7 +9,7 @@
     
     function getBuy() {
        // done using promise using then function syntax
-        fetch('stocks/buy').then(function(result) {
+        fetch('stocks/sellquantity/Ahilan004').then(function(result) {
             return result.json();
         }).then(function (tradeList) {
         	 
@@ -46,9 +46,9 @@
 
                 var dateString = date + "-" +(month + 1) + "-" + year;
                 
-                htmlString+="<ul><li>" + dateString + "</li>";
-                htmlString+="<li><b>Quantity:</b>" + trade.quantity+ "</li>";
-                htmlString+="<li><b>State:</b>" + trade.state+ "</li></ul></div></div>";
+               //htmlString+="<ul><li>" + dateString + "</li>";
+                htmlString+="<ul><li><b>Quantity:</b>" + trade.quantity+ "</li></ul></div></div>";
+                //htmlString+="<li><b>State:</b>" + trade.state+ "</li></ul></div></div>";
                 
                 
             });
