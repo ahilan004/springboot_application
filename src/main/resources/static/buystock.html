@@ -74,7 +74,7 @@
             async function addtrade(trade) {
             	var user=localStorage.getItem("user");
             	var url="/stocks/create/"+user;
-            	alert(url);
+            	//alert(url);
                 let response = await fetch(url, {
                     method: "POST",
                     headers :{

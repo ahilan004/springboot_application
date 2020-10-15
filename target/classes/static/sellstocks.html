@@ -52,7 +52,10 @@
      });
  	
  	//fetch available quantity for sell and need to set username from session
- 	fetch('stocks/sell/'+urlParams.get('ticker')+'/Ahilan004').then(function(response){
+ 	            	var user=localStorage.getItem("user");
+            	//var url="/stocks/create/"+user;
+
+ 	fetch('stocks/sell/'+urlParams.get('ticker')+'/'+user).then(function(response){
          response.json().then(function(data) {
          	availablequantity=data;
          	
@@ -97,7 +100,10 @@
             }}
 
             async function addtrade(trade) {
-                let response = await fetch("/stocks/sellorder", {
+            	
+            	var user=localStorage.getItem("user");
+            	var url="/stocks/sellorder/"+user
+                let response = await fetch(url, {
                     method: "POST",
                     headers :{
                         'Content-Type': 'application/json;charset=utf-8'

@@ -8,6 +8,12 @@
 </head>
 
 <script>
+
+function myfunction(){
+	//alert("dd")
+	localStorage.removeItem("user");
+}
+
 async function submitHandler(event) {
 	
 
@@ -31,11 +37,9 @@ async function submitHandler(event) {
         	   var n1 = p.localeCompare(user1.password);
         	   
         	   if(n==0&&n1==0)
-        		   {alert("cc");
-        		   localStorage.setItem("user",user.username);
-        		    window.sessionStorage.setItem("username",user.username);
-        		   
-        		   var url="index.html";
+        		   {
+				     localStorage.setItem("user",user.username);
+        		   var url="index.html?username="+u;
         		    window.location.href=url;
         		    return false;
         		   }
@@ -43,9 +47,11 @@ async function submitHandler(event) {
     
         });
     
-       
-    });
-     window.location.href="signup.html";
+    });  
+    
+   
+    localStorage.setItem("user",user.username);
+    window.location.href="index.html";
     return false;
    
  
@@ -70,7 +76,7 @@ async function addUser(user) {
 
 </script>
 
-<body>  
+<body  onload="myfunction()">  
 
 <form id="addForm" class="login100-form validate-form" name="addForm" method="post"> 
 <div class="limiter">

@@ -35,6 +35,7 @@ import javax.validation.Valid;
 @CrossOrigin
 public class BuyStockController {
 	
+	
 	@Autowired
 	private StockRepository stockRepository;
 	
