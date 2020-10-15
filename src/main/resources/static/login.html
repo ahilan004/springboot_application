@@ -25,15 +25,14 @@ async function submitHandler(event) {
     user.password= form.pass.value;
     
     var u = user.username;
-   // var p = user.password;
+    var p = user.password;
+    
+    var url='users/list/'+u+'/'+p;
     
     
-    
-    fetch('users/list/'+u).then(function(response){
+    fetch(url).then(function(response){
         response.json().then(function(data) {
-        	
         	var res=data;
-        	
         	if(res==1){
         		
         	localStorage.setItem("user",user.username);
@@ -43,7 +42,7 @@ async function submitHandler(event) {
  		    return false;
         	}
         	else{
-        		alert("User not registered")
+        		alert("Invalid Username or Password");
         		window.location.href="signup.html";
         	    return false;
         	   

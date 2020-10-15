@@ -25,7 +25,21 @@ public class UsersController {
 	@Autowired
 	private UsersRepository usersRepository;
 	
-	@GetMapping("/list/{username}")
+	@GetMapping("/list/{username}/{password}")
+	public int getAllusernamePassword(@PathVariable String username,@PathVariable String password){
+	int res=0;
+	List<Users> users= usersRepository.findAll();
+	for (int i = 0; i <users.size(); i++) {
+		if((users.get(i).getUsername().equals(username))&&(users.get(i).getPassword().equals(password))) {
+			return 1;
+		}
+		
+		
+	}
+		return 0;
+	
+	}
+	@GetMapping("/check/{username}")
 	public int getAllusername(@PathVariable String username){
 	int res=0;
 	List<Users> users= usersRepository.findAll();
@@ -40,14 +54,10 @@ public class UsersController {
 	
 	}
 	
-	
-	
-	
+	//@GetMapping("/list")
 	public List<Users> getAll(){
 		return usersRepository.findAll();	
-	
-	
-	}
+		}
 	
 	
 	 @RequestMapping(method=RequestMethod.POST, value="/add")
