@@ -45,10 +45,8 @@
          	
          	
          });
-     }).catch(function(error) {
-         console.log('Fetch Error:', error);
-     });
- 	
+     })
+ 	alert("ll");
  	//fetch available quantity for sell and need to set username from session
  	fetch('stocks/sell/'+urlParams.get('ticker')+'/Ahilan004').then(function(response){
          response.json().then(function(data) {
