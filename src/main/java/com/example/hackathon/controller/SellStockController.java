@@ -112,7 +112,7 @@ public class SellStockController {
 			    	buyquantity+=listTrade.get(j).getQuantity();
 			    }
 			    
-			    else if(listTrade.get(j).getType().equals(TradTypeSell)&&!listTrade.get(j).getState().equals(TradStateRejected)&&listTrade.get(j).getState().equals(TradStateFilled)&&listTrade.get(j).getTicker().equals(ticker)) {
+			    else if(listTrade.get(j).getType().equals(TradTypeSell)&&!listTrade.get(j).getState().equals(TradStateRejected)&&listTrade.get(j).getTicker().equals(ticker)) {
 			    	sellquantity+=listTrade.get(j).getQuantity();
 			    }
 			    else {
