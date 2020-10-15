@@ -24,6 +24,10 @@
 
     <!-- Main CSS-->
     <link href="bcss/main.css" rel="stylesheet" media="all">
+    
+    g1{
+    background-image: url("ezgif.com-gif-maker.mp4");
+    }
  <script>
         
 
@@ -45,8 +49,10 @@
          	
          	
          });
-     })
- 	alert("ll");
+     }).catch(function(error) {
+         console.log('Fetch Error:', error);
+     });
+ 	
  	//fetch available quantity for sell and need to set username from session
  	fetch('stocks/sell/'+urlParams.get('ticker')+'/Ahilan004').then(function(response){
          response.json().then(function(data) {
