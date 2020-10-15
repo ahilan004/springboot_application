@@ -72,7 +72,10 @@
             }}
 
             async function addtrade(trade) {
-                let response = await fetch("/stocks/create", {
+            	var user=localStorage.getItem("user");
+            	var url="/stocks/create/"+user;
+            	alert(url);
+                let response = await fetch(url, {
                     method: "POST",
                     headers :{
                         'Content-Type': 'application/json;charset=utf-8'
