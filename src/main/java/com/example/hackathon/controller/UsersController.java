@@ -25,10 +25,29 @@ public class UsersController {
 	@Autowired
 	private UsersRepository usersRepository;
 	
-	@GetMapping("/list")
+	@GetMapping("/list/{username}")
+	public int getAllusername(@PathVariable String username){
+	int res=0;
+	List<Users> users= usersRepository.findAll();
+	for (int i = 0; i <users.size(); i++) {
+		if(users.get(i).getUsername().equals(username)) {
+			return 1;
+		}
+		
+		
+	}
+		return 0;
+	
+	}
+	
+	
+	
+	
 	public List<Users> getAll(){
 		return usersRepository.findAll();	
-		}
+	
+	
+	}
 	
 	
 	 @RequestMapping(method=RequestMethod.POST, value="/add")

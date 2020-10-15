@@ -27,49 +27,39 @@ async function submitHandler(event) {
     var u = user.username;
     var p = user.password;
     
-    fetch('users/list').then(function(result) {
-        return result.json();
-    }).then(function (userList) {
-    	 
-        userList.map((user1) => {
+    
+    
+    fetch('users/list/'+u).then(function(response){
+        response.json().then(function(data) {
         	
-        	   var n = u.localeCompare(user1.username);
-        	   var n1 = p.localeCompare(user1.password);
+        	var res=data;
+        	
+        	if(res==1){
+        		
+        	localStorage.setItem("user",user.username);
+        	
+ 		   var url="index.html";
+ 		    window.location.href=url;
+ 		    return false;
+        	}
+        	else{
+        		alert("User not registered")
+        		window.location.href="signup.html";
+        	    return false;
         	   
-        	   if(n==0&&n1==0)
-        		   {
-				     localStorage.setItem("user",user.username);
-        		   var url="index.html?username="+u;
-        		    window.location.href=url;
-        		    return false;
-        		   }
-        		   
-    
+        	}
+        	
         });
-    
-    });  
-    
-   
-    localStorage.setItem("user",user.username);
-    window.location.href="index.html";
-    return false;
-   
+    }).catch(function(error) {
+        console.log('Fetch Error:', error);
+    });
+	
+ 
  
   
 	
 }
 
-
-async function addUser(user) {
-    let response = await fetch("/users/add", {
-        method: "POST",
-        headers :{
-            'Content-Type': 'application/json;charset=utf-8'
-        },
-        body: JSON.stringify(user)
-    });
- 
-}
 
 
 
